@@ -47,7 +47,7 @@ void open_file(*file_name);
 int parse_file(char *buffer, int line_number, int format);
 void read_file(FILE *);
 int len_chars(FILE *);
-void find_finc(char, char, int, int);
+void find_func(char, char, int, int);
 
 /* Stack operations */
 stack_t *create_node(int n);
@@ -61,7 +61,7 @@ void call_fun(op_fun, char *, char *, int, int);
 void print_top(stack_t **, unsigned int);
 void pop_top(stack_t **, unsigned int);
 void nop(stack_t **, unsigned int);
-void swap_nodes(stack_t **, unsigned int);
+void swap_node(stack_t **, unsigned int);
 
 /* Math operation for nodes */
 void add_node(stack **, unsigned int);

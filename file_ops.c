@@ -37,3 +37,122 @@ void read_file(FILE *fd)
 
 	free(buffer);
 }
+
+/**
+ * parse_line - seperate lines of args into tokens
+ * @buffer: line from file
+ * @num_line: number line
+ * @format: storage format. if 0 save as stack, if
+ * 1 save as queue
+ */
+int parse_line(char *buffer, int num_line, int format)
+{
+	char *opcode, *val;
+	const char *delim = "\n ";
+
+	if (buffer == NULL)
+		err(4);
+
+	opcode = strtok(buffer, delim);
+	if (opcode == NULL)
+		return (format);
+	value = strtok(NULL, delim);
+
+	if (strcmp(opcode, "stack") == 0)
+		return (0);
+	if (strcmp(opcode, "queue") == 0)
+		return (1);
+	find_func(opcode, val, num_line, format);
+	return (format);
+}
+
+/**
+ * find_func - find appropriate funcs for opcode
+ * @opcode: opcode
+ * @val: val of opcode
+ * @format: storage format. if 0 save as stack, if
+ * 1 save as queue
+ * @num_line: number line
+ *
+ * Return: void
+ */
+
+void find_func(char *opcode, char *val, int num_line, int format)
+{
+	int i;
+	int flag;
+
+	instruction_t func_list[] = {
+		{"push", add_to_stack},
+		{"pall", print_stack},
+		{"pint", print_top},
+		{"pop", pop_top},
+		{"nop", nop},
+		{"swap", swap_node},
+		{"add", add_node},
+		{"sub", sub_node},
+		{"mul", mul_node},
+		{"div", div_node},
+		{"mod", mod_node},
+		{"pchar", print_char},
+		{"pstr", print_str},
+		{"rot1", rot1},
+		{"rot2", rot2},
+		{NULL, NULL}
+	};
+
+	if (opcode[0] == '#')
+		return;
+
+	for (flag = 1, i = 0; func_list[i].opcode != NULL; i++)
+	{
+		if (strcmp(opcode, func_list[i].opcode) == 0)
+		{
+			call_fun(func_list[i].f, opcode, val, num_line, format);
+			flag = 0;
+		}
+	}
+	if (flag == 1)
+		err(3, num_line, opcode);
+}
+
+/**
+ * call_fun - calls required function
+ * @func: pointer to function to be callled
+ * @op: string for op code
+ * @val: str for numeric val
+ * @num_line: number line
+ * @format: format specifier: 0 for stack and 1 for queue
+ *
+ * Return: void
+ */
+void call_fun(op_func func, char *op, char *val, int num_line, int format)
+{
+	stack_t *node;
+	int flag;
+	int i;
+
+	flag = 1;
+	if (strcmp(op, "push") == 0)
+	{
+		if (val != NULL && val[0] == '-')
+		{
+			val = val + 1;
+			flag = -1;
+		}
+		if (val == NULL)
+			err(5, num_line);
+		for (i = 0; val[i] != '\0'; i++)
+		{
+			if (isdigit(val[i]) == 0)
+				err(5, num_line);
+		}
+		node = create_node(atoi(val) * flag);
+		if (format == 0)
+			func(&node, num_line);
+		if (format == 1)
+			add_to_queue(&node, num_line);
+	}
+	else
+		func(&head, num_line);
+}
