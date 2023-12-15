@@ -1,7 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#define GNU_SOURCE
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
@@ -70,3 +70,14 @@ void div_node(stack **, unsigned int);
 void mul_node(stack **, unsigned int);
 void mod_node(stack **, unsigned int);
 
+
+/*String operations*/
+void print_char(stack_t **, unsigned int);
+void print_str(stack_t **, unsigned int);
+void rotl(stack_t **, unsigned int);
+
+/*Error hanlding*/
+void err(int err_inp, ...);
+void more_err(int err_inp, ...);
+void string_err(int err_inp, ...);
+void rotr(stack_t **, unsigned int);
