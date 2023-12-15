@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
-#include <ctypes.h>
+#include <ctype.h>
 #include <unistd.h>
 #include <stdarg.h>
 
@@ -43,11 +43,11 @@ extern stack_t *head;
 typedef void (*op_func)(stack_t **, unsigned int);
 
 /* File functions */
-void open_file(*file_name);
+void open_file(char *file_name);
 int parse_file(char *buffer, int line_number, int format);
 void read_file(FILE *);
 int len_chars(FILE *);
-void find_func(char, char, int, int);
+void find_func(char *, char *, int, int);
 
 /* Stack operations */
 stack_t *create_node(int n);
@@ -56,7 +56,7 @@ void print_stack(stack_t **, unsigned int);
 void add_to_stack(stack_t **, unsigned int);
 void add_to_queue(stack_t **, unsigned int);
 
-void call_fun(op_fun, char *, char *, int, int);
+void call_fun(op_func, char *, char *, int, int);
 
 void print_top(stack_t **, unsigned int);
 void pop_top(stack_t **, unsigned int);
@@ -64,11 +64,11 @@ void nop(stack_t **, unsigned int);
 void swap_node(stack_t **, unsigned int);
 
 /* Math operation for nodes */
-void add_node(stack **, unsigned int);
-void sub_node(stack **, unsigned int);
-void div_node(stack **, unsigned int);
-void mul_node(stack **, unsigned int);
-void mod_node(stack **, unsigned int);
+void add_node(stack_t **, unsigned int);
+void sub_node(stack_t **, unsigned int);
+void div_node(stack_t **, unsigned int);
+void mul_node(stack_t **, unsigned int);
+void mod_node(stack_t **, unsigned int);
 
 
 /*String operations*/
@@ -81,3 +81,5 @@ void err(int err_inp, ...);
 void more_err(int err_inp, ...);
 void string_err(int err_inp, ...);
 void rotr(stack_t **, unsigned int);
+
+#endif

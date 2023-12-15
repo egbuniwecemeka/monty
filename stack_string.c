@@ -62,7 +62,7 @@ void rotl(stack_t **stack, __attribute__((unused))unsigned int ln)
 	while (temp->next != NULL)
 		temp = temp->next;
 
-	tmp->next = *stack;
+	temp->next = *stack;
 	(*stack)->prev = temp;
 	*stack = (*stack)->next;
 	(*stack)->prev->next = NULL;
@@ -87,7 +87,7 @@ void rotr(stack_t **stack, __attribute__((unused))unsigned int ln)
 	while (temp->next != NULL)
 		temp = temp->next;
 
-	tmp->next = *stack;
+	temp->next = *stack;
 	temp->prev->next = NULL;
 	temp->prev = NULL;
 	(*stack)->prev = temp;

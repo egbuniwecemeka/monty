@@ -20,34 +20,36 @@ void open_file(char *file_name)
 
 /**
  * read_file - reads a file
- * @fd: pointer to file des
- *
+ * @fd: pointer to file descriptor
  * Return: void
  */
+
 void read_file(FILE *fd)
 {
-	int num_line, format = 0;
+	int line_number, format = 0;
 	char *buffer = NULL;
 	size_t len = 0;
 
-	for (num_line = 1; getline(&buffer, &len, fd) != -1; num_line++)
+	for (line_number = 1; getline(&buffer, &len, fd) != -1; line_number++)
 	{
-		format = parse_line(buffer, num_line, format);
+		format = parse_line(buffer, line_number, format);
 	}
-
 	free(buffer);
 }
 
 /**
- * parse_line - seperate lines of args into tokens
- * @buffer: line from file
- * @num_line: number line
- * @format: storage format. if 0 save as stack, if
- * 1 save as queue
+ * parse_line - Separates each line into tokens to determine
+ * which function to call
+ * @buffer: line from the file
+ * @line_number: line number
+ * @format:  storage format. If 0 Nodes will be entered as a stack.
+ * if 1 nodes will be entered as a queue.
+ * Return: Returns 0 if the opcode is stack. 1 if queue.
  */
-int parse_line(char *buffer, int num_line, int format)
+
+int parse_line(char *buffer, int line_number, int format)
 {
-	char *opcode, *val;
+	char *opcode, *value;
 	const char *delim = "\n ";
 
 	if (buffer == NULL)
@@ -62,7 +64,8 @@ int parse_line(char *buffer, int num_line, int format)
 		return (0);
 	if (strcmp(opcode, "queue") == 0)
 		return (1);
-	find_func(opcode, val, num_line, format);
+
+	find_func(opcode, value, line_number, format);
 	return (format);
 }
 
@@ -97,7 +100,7 @@ void find_func(char *opcode, char *val, int num_line, int format)
 		{"pchar", print_char},
 		{"pstr", print_str},
 		{"rot1", rot1},
-		{"rot2", rot2},
+		{"rot2", rotr},
 		{NULL, NULL}
 	};
 

@@ -26,7 +26,7 @@ void err(int err_inp, ...)
 			break;
 		case 2:
 			fprintf(stderr, "Can't open or read file%s\n",
-			va_arg(err_ag, char *);
+			va_arg(err_ag, char *));
 			break;
 		case 3:
 			l_num = va_arg(err_ag, int);
@@ -75,9 +75,9 @@ void more_err(int err_inp, ...)
 					va_arg(err_ag, int));
 			break;
 		case 8:
-			l_num = va_arg(err_arg, unsigned int);
-			op = va_arg(err_arg, char *);
-			fprint(stderr, "len%d: can't %s, stack too short\n", l_num, op);
+			l_num = va_arg(err_ag, unsigned int);
+			op = va_arg(err_ag, char *);
+			fprintf(stderr, "len%d: can't %s, stack too short\n", l_num, op);
 			break;
 		case 9:
 			fprintf(stderr, "len%d: division by zero\n",
