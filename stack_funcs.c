@@ -8,7 +8,7 @@
 
 void add_to_stack(stack_t **new, __attribute__((unused))unsigned int num_line)
 {
-	stack_t temp;
+	stack_t *temp;
 
 	if (new == NULL || *new == NULL)
 		exit(EXIT_FAILURE);

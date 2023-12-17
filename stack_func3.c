@@ -1,3 +1,5 @@
+#include "monty.h"
+
 /**
  * mul_node - Multiplies the top two elements of the stack.
  * @stack: Pointer to a pointer pointing to top node.
@@ -33,7 +35,7 @@ void mod_node(stack_t **stack, unsigned int num_line)
 
 
 	if ((*stack)->n == 0)
-		more_err(9, _num_line);
+		more_err(9, num_line);
 	(*stack) = (*stack)->next;
 	mod = (*stack)->n % (*stack)->prev->n;
 	(*stack)->n = mod;

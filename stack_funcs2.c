@@ -80,7 +80,7 @@ void sub_node(stack_t **stack, unsigned int num_line)
  * @stack: Pointer to a pointer pointing to top node.
  * @num_line: line number of opcode.
  */
-void div_nodes(stack_t **stack, unsigned int num_line)
+void div_node(stack_t **stack, unsigned int num_line)
 {
 	int div;
 

@@ -4,7 +4,7 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <string.h>
 #include <ctype.h>
 #include <unistd.h>
 #include <stdarg.h>
@@ -36,7 +36,7 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*f)(stack_t **stack, unsigned int num_line);
 } instruction_t;
 
 extern stack_t *head;
@@ -44,7 +44,7 @@ typedef void (*op_func)(stack_t **, unsigned int);
 
 /* File functions */
 void open_file(char *file_name);
-int parse_file(char *buffer, int line_number, int format);
+int parse_line(char *buffer, int num_line, int format);
 void read_file(FILE *);
 int len_chars(FILE *);
 void find_func(char *, char *, int, int);

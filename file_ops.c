@@ -26,13 +26,13 @@ void open_file(char *file_name)
 
 void read_file(FILE *fd)
 {
-	int line_number, format = 0;
+	int num_line, format = 0;
 	char *buffer = NULL;
 	size_t len = 0;
 
-	for (line_number = 1; getline(&buffer, &len, fd) != -1; line_number++)
+	for (num_line = 1; getline(&buffer, &len, fd) != -1; num_line++)
 	{
-		format = parse_line(buffer, line_number, format);
+		format = parse_line(buffer, num_line, format);
 	}
 	free(buffer);
 }
@@ -47,7 +47,7 @@ void read_file(FILE *fd)
  * Return: Returns 0 if the opcode is stack. 1 if queue.
  */
 
-int parse_line(char *buffer, int line_number, int format)
+int parse_line(char *buffer, int num_line, int format)
 {
 	char *opcode, *value;
 	const char *delim = "\n ";
@@ -65,7 +65,7 @@ int parse_line(char *buffer, int line_number, int format)
 	if (strcmp(opcode, "queue") == 0)
 		return (1);
 
-	find_func(opcode, value, line_number, format);
+	find_func(opcode, value, num_line, format);
 	return (format);
 }
 
@@ -99,8 +99,8 @@ void find_func(char *opcode, char *val, int num_line, int format)
 		{"mod", mod_node},
 		{"pchar", print_char},
 		{"pstr", print_str},
-		{"rot1", rot1},
-		{"rot2", rotr},
+		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 
